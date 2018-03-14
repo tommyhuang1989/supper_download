@@ -1,0 +1,41 @@
+﻿using super_download.models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace super_download
+{
+    /// <summary>
+    /// MainWindow.xaml 的交互逻辑
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(tb_path.Text))
+                return;
+
+            string[] path_array = Regex.Split(tb_path.Text, " ");
+
+            sd_download_manager download_manager = new sd_download_manager(path_array);
+            download_manager.init_download_files();
+            download_manager.download();
+        }
+    }
+}
